@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="SQL indexing using B Tree">
+  <meta name="author" content="saurav shah">
+
+  <title>Checkboard</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+   
+  <style>
+    form,#output,#inference{
+      padding: 8px;
+      border: 1px solid black;
+    }
+    form span{
+      display: inline-block;
+      min-width: 100%;
+    }
+    #output div,#inference div{
+      display: inline-block;
+      min-height: 30px;
+      padding: 3px;
+      width: 100%;
+    }
+    #output div:nth-child(even){
+      background-color: #DFC6ED;
+      
+    }
+    #inference div:nth-child(even){
+      background-color: #DFC6ED;
+      
+    }
+    #output div span:nth-child(odd){
+      float: left;
+      width: 70%;
+    }
+    #output div span:nth-child(even){
+      float: left;
+      width: 30%;
+    }
+    #output div span:nth-child(even)::before{
+      content: ": ";
+    }
+    .error{
+      color:maroon;
+    }
+    .success{
+      color: green;
+    }
+    .dark{
+      background-color: black;
+    }
+    .light{
+      background-color: cornsilk;
+    }
+    #game{
+      display: block;
+      position: absolute;
+    }
+    .grid_row{
+      display: block;
+      position: relative;
+      width: 100%;
+
+    }
+    .grid_row span{
+      display: inline-block;
+      float: left;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      vertical-align: center;
+      line-height: 60px;
+      padding: auto auto;
+      border: 1px solid black;
+      font-weight: bolder;
+      color: green;
+    }
+    .grid_row span:hover{
+      background-color: crimson;
+      cursor: pointer;
+    }
+    .grid_row span:active{
+      background-color: green;
+      cursor: pointer;
+    }
+    .grid_row span img{
+      width: 50px;
+      height: 50px;
+      border: 0px;
+      border: 0px;
+    }
+    .empty img{
+      display: none;
+    }
+  </style>
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-weight: bolder;">Checkboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="documentation" class="bg-light">
+    <div class="container">
+      <div class="row" >
+        <div class="col-lg-8 mx-auto" id="game_space">
+          <div id="game">
+            <div class="grid_row">
+              <span class="dark">1</span>
+              <span class="light">1</span>
+              <span><img src="img.png"/></span>
+              <span>1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+  
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+
+</html>
