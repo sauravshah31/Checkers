@@ -17,39 +17,6 @@
   <link href="css/scrolling-nav.css" rel="stylesheet">
    
   <style>
-    form,#output,#inference{
-      padding: 8px;
-      border: 1px solid black;
-    }
-    form span{
-      display: inline-block;
-      min-width: 100%;
-    }
-    #output div,#inference div{
-      display: inline-block;
-      min-height: 30px;
-      padding: 3px;
-      width: 100%;
-    }
-    #output div:nth-child(even){
-      background-color: #DFC6ED;
-      
-    }
-    #inference div:nth-child(even){
-      background-color: #DFC6ED;
-      
-    }
-    #output div span:nth-child(odd){
-      float: left;
-      width: 70%;
-    }
-    #output div span:nth-child(even){
-      float: left;
-      width: 30%;
-    }
-    #output div span:nth-child(even)::before{
-      content: ": ";
-    }
     .error{
       color:maroon;
     }
@@ -70,7 +37,6 @@
       display: block;
       position: relative;
       width: 100%;
-
     }
     .grid_row span{
       display: inline-block;
@@ -86,7 +52,7 @@
       color: green;
     }
     .grid_row span:hover{
-      background-color: #C6FF94;
+      background-color: #1D1166;/*#C6FF94;*/
       cursor: pointer;
     }
     .grid_row span:active{
@@ -110,6 +76,28 @@
     .available{
       background-color: #FFF4BC;
     }
+    .selection{
+      background-color: #1D1166;
+    }
+    .turn {
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    .turn img{
+      max-height: 30px;
+    }
+
+    @media only screen and (max-width: 420px){
+      .grid_row span{
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+      }
+      .grid_row span img{
+        width: 30px;
+        height: 30px;
+      }
+    }
   </style>
 
 </head>
@@ -124,22 +112,21 @@
     </div>
   </nav>
 
+
   <section id="main" class="bg-light">
     <div class="container">
       <div class="row" >
+        <div class=" col-lg-8 mx-auto turn">
+          <img src="player1.svg" alt="" id="curr_player"/>
+          <span>Make a move</span>
+        </div>
         <div class="col-lg-8 mx-auto" id="game_space">
         </div>
       </div>
     </div>
   </section>
 
-  <section id="message">
-    <div class="container">
-      <div class="row">
-        lih
-      </div>
-    </div>
-  </section>
+
 
 
 

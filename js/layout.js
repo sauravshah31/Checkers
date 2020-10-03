@@ -1,4 +1,4 @@
-uid = 0;
+var uid = 0;
 
 function get_row(cols,src1,src2,player){
     var row = document.createElement('div')
