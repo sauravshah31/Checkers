@@ -24,11 +24,11 @@ function get_layout(n){
     game.id="game";
     for(var i=0;i<n/2-1;i++){
         if(i%2==0){
-            src1="player2.png";
+            src1="player2.svg";
             src2="#";
         }else{
             src1="#";
-            src2="player2.png";
+            src2="player2.svg";
         }
         var row = get_row(n,src1,src2,"player1");
         game.appendChild(row)
@@ -40,9 +40,9 @@ function get_layout(n){
     for(var i=0;i<n/2-1;i++){
         if(i%2==0){
             src1="#";
-            src2="player1.png";
+            src2="player1.svg";
         }else{
-            src1="player1.png";
+            src1="player1.svg";
             src2="#";
         }
         var row = get_row(n,src1,src2,"player1");
