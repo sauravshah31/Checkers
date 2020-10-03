@@ -1,3 +1,4 @@
+uid = 0;
 
 function get_row(cols,src1,src2,player){
     var row = document.createElement('div')
@@ -12,6 +13,7 @@ function get_row(cols,src1,src2,player){
         }else{
             span.className = player;
         }
+        span.id=uid++;
         span.appendChild(img);
         row.appendChild(span);
     }
@@ -30,11 +32,11 @@ function get_layout(n){
             src1="#";
             src2="player2.svg";
         }
-        var row = get_row(n,src1,src2,"player1");
+        var row = get_row(n,src1,src2,"player2");
         game.appendChild(row)
     }
     for(var i=0;i<2;i++){
-        var row = get_row(n,"#","#","player1");
+        var row = get_row(n,"#","#","player2");
         game.appendChild(row)
     }
     for(var i=0;i<n/2-1;i++){
