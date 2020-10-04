@@ -8,12 +8,12 @@
             <img src="player1_king.svg" width="60"/>
         </span>
     </span>
-    <span style="float:right;">
+    <span>
         <span>
-            <img src="player2.svg" width="60"/>
+            <img src="player2.svg" width="60" align="right"/>
         </span>
         <span>
-            <img src="player2_king.svg" width="60"/>
+            <img src="player2_king.svg" width="60" align="right"/>
         </span>
     </span>
 </div>
@@ -22,8 +22,8 @@
 
 
 <div style="width:100%;">
-    <span style="display:block; margin-left:15%;margin-right:15%;width:80%">
-        <img src="demo.png" alt="Demo"/>
+    <span>
+        <img src="demo.png" alt="Demo" align="center"/>
     </span>
 </div>
 
