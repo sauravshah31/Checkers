@@ -15,8 +15,8 @@ function get_opponent(player){
 }
 
 function update_score(){
-    document.querySelectorAll('span #player1_score span')[0].textContent =player1_score;
-    document.querySelectorAll('span #player2_score span')[0].textContent =player2_score;
+    document.querySelectorAll('span #player1_score span')[0].textContent =player2_score;
+    document.querySelectorAll('span #player2_score span')[0].textContent =player1_score;
 }
 
 function search(config,box){
