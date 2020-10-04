@@ -211,6 +211,8 @@ function get_board_config(){
             config[i].push(span[j]);
         }
     }
+    
+  
     return config;
 }
 
