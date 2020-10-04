@@ -94,10 +94,12 @@ function display_path(config,pos,remove=false){
     box.classList.add("available");
     setTimeout(function(){
         display_path(config,pos,true);
-    },200);
+    },1000);
 }
 
 function swap(box1,box2){
+    box1.classList.remove("available");
+    box2.classList.remove("available");
     console.log(box1,box2);
     var className,id,src;
     className = box1.className;
