@@ -14,6 +14,11 @@ function get_opponent(player){
     }
 }
 
+function update_score(){
+    document.querySelectorAll('span #player1_score span')[0].textContent =player1_score;
+    document.querySelectorAll('span #player2_score span')[0].textContent =player2_score;
+}
+
 function search(config,box){
     for(var i=0;i<config.length;i++){
         for(var j=0;j<config[i].length;j++){
@@ -25,35 +30,50 @@ function search(config,box){
     return [-1,-1];
 }
 
-function is_valid(config,x,y){
+function is_out_of_box(config,x,y){
     n = config.length;
     if(x<0 || y<0){
-        return false;
+        return true;
     }
     if(x>=n || y>=n){
-        return false;
+        return true;
     }
-    if(config[x][y].className.indexOf("empty")===-1)
-        return false;
-    return true;
+}
+function is_valid(config,x,y,xdis,ydis){
+    if(is_out_of_box(config,x,y)){
+        return [false]
+    }
+    if(config[x][y].className.indexOf("empty")===-1){
+        console.log("kill: ",x+xdis,y+ydis);
+        if(!is_out_of_box(config,x+xdis,y+ydis) && config[x+xdis][y+ydis].className.indexOf("empty")!==-1 && config[x][y].className.indexOf(curr_player)===-1){
+            return [true,x+xdis,y+ydis,config[x][y]];
+        }else{
+            return [false];
+        }
+    }
+    return [true,x,y,null];
 }
 
 function get_possible_move(config,pos){
     var box = config[pos[0]][pos[1]];
-    var n = config.length;
     var res = [];
+    var check;
     if(box.className.indexOf("king")!==-1){
-        if ( is_valid(config,pos[0]+1,pos[1]-1) ){
-            res.push([pos[0]+1,pos[1]-1]);
+        check = is_valid(config,pos[0]+1,pos[1]-1,1,-1);
+        if ( check[0]===true ){
+            res.push([check[1],check[2],check[3]]);
         }
-        if ( is_valid(config,pos[0]+1,pos[1]+1) ){
-            res.push([pos[0]+1,pos[1]+1]);
+        check = is_valid(config,pos[0]+1,pos[1]+1,1,1);
+        if ( check[0]===true ){
+            res.push([check[1],check[2],check[3]]);
         }
-        if ( is_valid(config,pos[0]-1,pos[1]-1) ){
-            res.push([pos[0]-1,pos[1]-1]);
+        check = is_valid(config,pos[0]-1,pos[1]-1,-1,-1);
+        if ( check[0]===true ){
+            res.push([check[1],check[2],check[3]]);
         }
-        if ( is_valid(config,pos[0]-1,pos[1]+1) ){
-            res.push([pos[0]-1,pos[1]+1]);
+        check = is_valid(config,pos[0]-1,pos[1]+1,-1,1);
+        if ( check[0]===true ) {
+            res.push([check[1],check[2],check[3]]);
         }
     }else{
         var dir;
@@ -64,18 +84,22 @@ function get_possible_move(config,pos){
         }
 
         if(dir === "down"){
-            if ( is_valid(config,pos[0]+1,pos[1]-1) ){
-                res.push([pos[0]+1,pos[1]-1]);
+            check = is_valid(config,pos[0]+1,pos[1]-1,1,-1);
+            if ( check[0]===true ){
+                res.push([check[1],check[2],check[3]]);
             }
-            if ( is_valid(config,pos[0]+1,pos[1]+1) ){
-                res.push([pos[0]+1,pos[1]+1]);
+            check = is_valid(config,pos[0]+1,pos[1]+1,1,1);
+            if ( check[0]===true ){
+                res.push([check[1],check[2],check[3]]);
             }
         }else if(dir==="up"){
-            if ( is_valid(config,pos[0]-1,pos[1]-1) ){
-                res.push([pos[0]-1,pos[1]-1]);
+            check = is_valid(config,pos[0]-1,pos[1]-1,-1,-1);
+            if ( check[0]===true ){
+                res.push([check[1],check[2],check[3]]);
             }
-            if ( is_valid(config,pos[0]-1,pos[1]+1) ){
-                res.push([pos[0]-1,pos[1]+1]);
+            check = is_valid(config,pos[0]-1,pos[1]+1,-1,1);
+            if ( check[0]===true ){
+                res.push([check[1],check[2],check[3]]);
             }
         }
     }
@@ -128,10 +152,10 @@ function swap(config,box1,box2){
 
 function in_possible_move(box){
     for(var i=0;i<curr_possible_moves.length;i++){
-        if(box.id===curr_possible_moves[i])
-            return true;
+        if(box.id===curr_possible_moves[i][0])
+            return [true,curr_possible_moves[i][1]];
     }
-    return false;
+    return [false];
 }
 function prompted_king(box,x,n){
     var dir;
@@ -164,7 +188,8 @@ function init_listeners(config){
                 if(box.className.indexOf("empty")!==-1){
                     //make a move
                     curr_selection.classList.remove("selection");
-                    if(in_possible_move(box)){
+                    var check = in_possible_move(box);
+                    if( check[0]===true ){
                         swap(curr_selection,box);
                         //swap(config,curr_selection,box);
                         if(prompted_king(box,x,n)){
@@ -172,7 +197,18 @@ function init_listeners(config){
                             box.querySelectorAll('img')[0].src = src;
                             box.classList.add("king");
                         }
-                        curr_player = get_opponent(curr_player);
+                        if(check[1]!==null){
+                            check[1].className = "empty";
+                            check[1].querySelectorAll('img')[0].src="#";
+                            if(curr_player=="player1"){
+                                player1_score++;
+                            }else{
+                                player2_score++;
+                            }
+                            update_score();
+                        }else{
+                            curr_player = get_opponent(curr_player);
+                        }
                         document.getElementById("curr_player").src = curr_player + ".svg";
                     }
                     curr_selection = null;
@@ -193,7 +229,7 @@ function init_listeners(config){
                 curr_possible_moves = [];
                 for(var p=0;p<possible_move.length;p++){
                     display_path(config,possible_move[p]);
-                    curr_possible_moves.push(config[possible_move[p][0]][possible_move[p][1]].id);
+                    curr_possible_moves.push([config[possible_move[p][0]][possible_move[p][1]].id , possible_move[p][2]]);
 
                 }
             });
