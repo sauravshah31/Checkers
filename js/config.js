@@ -94,7 +94,7 @@ function display_path(config,pos,remove=false){
     box.classList.add("available");
     setTimeout(function(){
         display_path(config,pos,true);
-    },1000);
+    },200);
 }
 
 function swap(box1,box2){
@@ -113,6 +113,16 @@ function swap(box1,box2){
     box2.querySelectorAll('img')[0].src = src;
 
 }
+/*
+function swap(config,box1,box2){
+    var pos1,pos2;
+    pos1 = search(config,box1);
+    pos2 = search(config,box2);
+    var temp = config[pos1[0]][pos1[1]];
+    config[pos1[0]][pos1[1]] = config[pos2[0]][pos2[1]];
+    config[pos2[0]][pos2[1]] = temp;
+}
+*/
 
 function in_possible_move(box){
     for(var i=0;i<curr_possible_moves.length;i++){
@@ -154,6 +164,7 @@ function init_listeners(config){
                     curr_selection.classList.remove("selection");
                     if(in_possible_move(box)){
                         swap(curr_selection,box);
+                        //swap(config,curr_selection,box);
                         if(prompted_king(box,x,n)){
                             var src = box.querySelectorAll('img')[0].src.indexOf("player1")!==-1?"player1_king.svg":"player2_king.svg";
                             box.querySelectorAll('img')[0].src = src;
