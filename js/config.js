@@ -14,9 +14,36 @@ function get_opponent(player){
     }
 }
 
+function  game_over(){
+    var  game = document.getElementById('game');
+    game.innerHTML = "";
+    var span = document.createElement('span')
+    var p = document.createElement('span');
+    var img = document.createElement('img');
+    if(player1_score>player2_score){
+        img.src="player1.svg";
+        p.textContent = "PLAYER 1 IS THE WINNER!!!"
+    }else if(player1_score<player2_score){
+        img.src="player2.svg";
+        p.textContent = "PLAYER 2 IS THE WINNER!!!"
+    }else{
+        img.src="#";
+        span.className = "empty";
+        p.textContent = "GAME DRAW";
+    }
+    span.appendChild(img);
+    span.appendChild(p);
+    game.appendChild(span);
+}
+
 function update_score(){
     document.querySelectorAll('span #player1_score span')[0].textContent =player2_score;
     document.querySelectorAll('span #player2_score span')[0].textContent =player1_score;
+
+    if(player1_score==12 || player2_score==12){
+        game_over();
+        exit();
+    }
 }
 
 function search(config,box){
@@ -44,7 +71,6 @@ function is_valid(config,x,y,xdis,ydis){
         return [false]
     }
     if(config[x][y].className.indexOf("empty")===-1){
-        console.log("kill: ",x+xdis,y+ydis);
         if(!is_out_of_box(config,x+xdis,y+ydis) && config[x+xdis][y+ydis].className.indexOf("empty")!==-1 && config[x][y].className.indexOf(curr_player)===-1){
             return [true,x+xdis,y+ydis,config[x][y]];
         }else{
