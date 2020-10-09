@@ -1,4 +1,4 @@
-# <a href="https://sauravshah31.github.io/checkboard/">Checkers</a>
+# <a href="https://sauravshah31.github.io/checkers/">Checkers</a>
 <div>
     <span>
         <span>
